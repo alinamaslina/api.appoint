@@ -8,7 +8,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule, { cors: true });
 
   const config = new DocumentBuilder()
-      .setTitle('Modo Api')
+      .setTitle('Appoint Api')
       .setDescription('API documentation')
       .setVersion('1.1')
       .addBearerAuth() // Add JWT Bearer Authorization
