@@ -3,17 +3,33 @@ import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { UsersDataClass } from "../Schemas/users.schema";
 import { CreateUserDto } from "../DTO/create-user.dto";
+import { AuthDataClass } from "../Schemas/auth.schema";
 
 @Injectable()
 export class UsersService {
   constructor(
-    @InjectModel(UsersDataClass.name) private usersModel: Model<UsersDataClass>
+    @InjectModel(UsersDataClass.name) private usersModel: Model<UsersDataClass>,
+    @InjectModel(AuthDataClass.name) private authModel: Model<AuthDataClass>
   ) {}
 
-  async create(createCatDto: CreateUserDto): Promise<UsersDataClass> {
-    const createdCat = new this.usersModel(createCatDto);
-    return createdCat.save();
+  async register(createUserDto: CreateUserDto): Promise<UsersDataClass> {
+    const newUser = new this.usersModel(createUserDto);
+    await newUser.save();
+
+    // 👇 создаём пользователя в auth_data
+    await this.authModel.create({
+      id: createUserDto.id,
+      login: createUserDto.email,
+      pass: createUserDto.pass,
+    });
+
+    return newUser;
   }
+
+  // async register(createCatDto: CreateUserDto): Promise<UsersDataClass> {
+  //   const createdCat = new this.usersModel(createCatDto);
+  //   return createdCat.save();
+  // }
 
   async findAll(): Promise<UsersDataClass[]> {
     return this.usersModel.find().exec();

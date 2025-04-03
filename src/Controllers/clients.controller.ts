@@ -1,24 +1,11 @@
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  Post,
-  Patch,
-  Query,
-  Put,
-  UseGuards,
-  Request,
-  Injectable,
-} from "@nestjs/common";
+import {Body, Controller, Delete, Get, Injectable, Patch, Post, Put, Query,} from "@nestjs/common";
 // import { Cron } from "@nestjs/schedule";
-import { CreateClientDto } from "../DTO/create-client.dto";
-import { ClientsDataClass } from "../Schemas/clients.schema";
-import { ClientsService } from "../Services/clients.service";
-import { AuthGuard } from "../Services/auth.guard";
-import { LogsService } from "../Services/logs.service";
-import { CustomRequest } from "../Common/common.interfaces";
-import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
+import {CreateClientDto} from "../DTO/create-client.dto";
+import {ClientsDataClass} from "../Schemas/clients.schema";
+import {ClientsService} from "../Services/clients.service";
+import {LogsService} from "../Services/logs.service";
+import {ApiBearerAuth, ApiTags} from "@nestjs/swagger";
+import {AuthService} from "../Services/auth.service";
 
 @ApiTags('Clients')
 @ApiBearerAuth() // Enable Bearer Auth for Swagger UI
@@ -27,64 +14,47 @@ import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
 export class ClientsController {
   constructor(
     private readonly ClientsService: ClientsService,
-    private readonly logsService: LogsService
-  ) {}
+    private readonly logsService: LogsService,
+    private readonly authService: AuthService) {}
 
-  @UseGuards(AuthGuard)
+  @Post("register")
+  async register(@Body() dto: CreateClientDto) {
+    return this.authService.registerClient(dto);
+  }
+
+  // @Post('register')
+  // async register(@Body() createClientDto: CreateClientDto) {
+  //   return this.ClientsService.register(createClientDto);
+  // }
+
   @Post()
-  async create(
-    @Body() CreateClientsDto: CreateClientDto,
-    @Request() req: CustomRequest
-  ) {
-    this.logsService.log(req);
-
-    return this.ClientsService.create(CreateClientsDto, req.user);
+  async create(@Body() createClientDto: CreateClientDto) {
+    return this.ClientsService.create(createClientDto);
   }
 
-  @UseGuards(AuthGuard)
   @Put()
-  async update(
-    @Body() CreateClientsDto: CreateClientDto,
-    @Request() req: CustomRequest
-  ) {
-    this.logsService.log(req);
-
-    return this.ClientsService.update(CreateClientsDto, req.user);
+  async update(@Body() createClientDto: CreateClientDto) {
+    return this.ClientsService.update(createClientDto);
   }
-  @UseGuards(AuthGuard)
+
   @Patch()
-  async updateValue(
-    @Body() CreateClientsDto: CreateClientDto,
-    @Request() req: CustomRequest
-  ) {
-    this.logsService.log(req);
-    return this.ClientsService.updateValue(CreateClientsDto, req.user);
+  async updateValue(@Body() createClientDto: CreateClientDto) {
+    return this.ClientsService.updateValue(createClientDto);
   }
 
-  @UseGuards(AuthGuard)
+  // TODO: add guards for users data safety
   @Get()
-  async findAll(@Request() req: CustomRequest): Promise<ClientsDataClass[]> {
-    return this.ClientsService.findAll(req.user);
+  async findAll(): Promise<ClientsDataClass[]> {
+    return this.ClientsService.findAll();
   }
 
-  @UseGuards(AuthGuard)
   @Get(":id")
   async findOne(@Query("id") id: string): Promise<ClientsDataClass> {
     return this.ClientsService.findOne(id);
   }
 
-  @UseGuards(AuthGuard)
   @Delete()
-  async delete(@Query("id") id: string, req: CustomRequest) {
-    this.logsService.log(req);
-
+  async delete(@Query("id") id: string) {
     return this.ClientsService.delete(id);
   }
-
-  // @Cron("5,10,20,30,40,50 * * * * *")
-  // checkPayments() {
-  //   console.log("********");
-
-  //   this.ClientsService.checkPayments();
-  // }
 }

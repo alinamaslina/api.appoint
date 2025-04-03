@@ -3,7 +3,7 @@ import { ClientsModule } from './Modules/clients.module';
 import { MongooseModule } from "@nestjs/mongoose";
 import { AuthModule } from "./Modules/auth.module";
 import { UsersModule } from "./Modules/users.module";
-import {CompaniesModule} from "./Modules/companies.module";
+import { CompaniesModule } from "./Modules/companies.module";
 
 
 require("dotenv").config();

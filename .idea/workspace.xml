@@ -5,9 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f52a1894-55f4-4d14-9e78-d8565c0c198a" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Services/logs.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/logs.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/clients.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/clients.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/users.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/users.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/auth.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/auth.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/clients.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/clients.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/users.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/users.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Services/auth.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/auth.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Services/clients.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/clients.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Services/users.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/users.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.module.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
